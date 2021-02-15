@@ -5,17 +5,18 @@ public class Main {
 
     public static void main(String[] args) {
         int manualOrFile;
-        int[] userinputs = new int[100];
+        int[] userInputs = new int[100];
 
         manualOrFile = introDialogue();
 
         if (manualOrFile == 1) {
-            userinputs = manualScanner();
+            userInputs = manualScanner();
         } else if (manualOrFile == 2) {
-            userinputs = fileScanner();
+            userInputs = fileScanner();
         }
 
-
+        System.out.print("\nThe Mean is: " + meanCalc(userInputs));
+        System.out.print("\nThe Median is: " + medianCalc(userInputs));
     }
 
     public static int introDialogue() {
@@ -99,10 +100,95 @@ public class Main {
             }
 
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
         }
 
         return numberArray;
     }
+
+    public static double meanCalc(int[] collectedData) {
+        double mean = 0;
+
+        for (int i = 0; i < collectedData.length; i++) {
+            mean = mean + collectedData[i];
+        }
+
+        mean = mean / collectedData.length;
+
+        return mean;
+    }
+
+    public static double medianCalc(int[] collectedData) {
+        double median = 0;
+        int arrLength = collectedData.length;
+        int double1 = 0;
+        int double2 = 0;
+
+        Arrays.sort(collectedData);
+
+        if (collectedData.length % 2 == 1) {
+            median = collectedData[(arrLength + 1) / 2 - 1];
+        } else {
+            double1 = collectedData[arrLength / 2 - 1];
+            double2 = collectedData[arrLength / 2];
+            median = ((double) double1 + double2) / 2;
+        }
+        return median;
+    }
+
+    /*public static int[] modeCalc(int[] collectedData) {
+
+        int[] rawMode = new int[collectedData.length]; // Mode array, made an array to possibly store more than 1 mode.
+        int topCount = 0; // Counts for the highest frequency in the dataset
+        int modeIndex = 0; // Used as an index for the mode array.
+
+        //Fills the mode array with -1 placeholders
+        for (int i = 0; i < collectedData.length; i++) {
+            rawMode[i] = -1;
+        }
+
+        Arrays.sort(collectedData); // Sorts the array smallest -> largest
+
+        int count;
+        for (int i = 0; i < collectedData.length; i++) {
+            count = 0;
+            for (int k = 0; k < collectedData.length; k++) {
+                if (collectedData[k] == collectedData[i]) {
+                    ++count;
+                }
+            }
+            if (count > topCount) {
+                topCount = count;
+            }
+        }
+
+        for (int i = 0; i < collectedData.length; i++) {
+            int counter = 0;
+            for (int k = 0; k < collectedData.length; k++) {
+                if (collectedData[k] == collectedData[i]) {
+                    ++counter;
+                }
+            }
+            if (counter == topCount) {
+                rawMode[modeIndex] = collectedData[i];
+                modeIndex++;
+            }
+        }
+
+        for (int i = 0; i> rawMode.length; i++){
+
+        }
+
+        int[] mode = new int[];
+
+        return mode;
+    }*/
 }
+
+    /*public double varianceCalc(){
+        return;
+    }*/
+
+    /*public double stdevCalc(){
+
+    }*/
